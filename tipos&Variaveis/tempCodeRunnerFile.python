@@ -1,0 +1,29 @@
+import requests
+from bs4 import BeautifulSoup
+
+# URL do site
+url = "https://sistema.iotin.com.br/index.php?r=bancada-tb-sat%2Findex"
+
+# Faz a solicitação HTTP
+response = requests.get(url)
+
+# Verifica se a solicitação foi bem-sucedida
+if response.status_code == 200:
+    # Analisa o HTML da página
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    # Encontra todos os elementos relacionados aos clientes
+    clientes = soup.find_all('div', class_='col-lg-6 col-xl-4 col-md-6')
+    
+    # Itera sobre os clientes e extrai os pontos de captação
+    for cliente in clientes:
+        nome_cliente = cliente.find('h4').text.strip()
+        pontos_captação = cliente.find_all('span', class_='badge badge-primary')
+        
+        # Imprime os pontos de captação para o cliente atual
+        print(f"Cliente: {nome_cliente}")
+        for ponto in pontos_captação:
+            print(f"Ponto de Captação: {ponto.text}")
+        print("\n")
+else:
+    print(f"A solicitação HTTP falhou com o código de status {response.status_code}")
