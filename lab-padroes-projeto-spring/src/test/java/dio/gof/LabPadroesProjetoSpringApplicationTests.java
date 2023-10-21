@@ -1,10 +1,10 @@
-package DIO.padroesprojetospring;
+package dio.gof;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PadroesProjetoSpringApplicationTests {
+class LabPadroesProjetoSpringApplicationTests {
 
 	@Test
 	void contextLoads() {
